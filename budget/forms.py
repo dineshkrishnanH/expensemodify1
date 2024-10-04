@@ -2,6 +2,8 @@ from django import forms
 
 from budget.models import Expense
 
+from django. contrib. auth.models import User
+
 class ExpenseForm(forms.ModelForm):
 
     class Meta:
@@ -21,3 +23,17 @@ class ExpenseForm(forms.ModelForm):
             "category":forms.Textarea(attrs={"class":"form-control form-select custom-category-class","style":"width: 100%; padding: 16px;"}),
 
         }
+
+class RegistrationForm(forms.ModelForm):
+
+    class Meta:
+
+        model=User
+
+        fields=["username","email","password"]
+
+class SignInForm(forms.Form):
+
+    username=forms.CharField
+
+    Password=forms.CharField

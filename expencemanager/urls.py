@@ -33,4 +33,8 @@ urlpatterns = [
     path('expense/<int:pk>/remove',views.ExpenseDeleteView.as_view(),name='expense-delete'),
     
     path("",views.ExpenseSummaryView.as_view(),name="expense_summary"),
+
+    path("register/",views.SignupView.as_view(),name="signup"),
+
+    path("signin/",views.SignInView.as_view(),name="signin"),
 ]
