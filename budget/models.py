@@ -2,6 +2,7 @@ from django.db import models
 
 # Create your models here.
 
+from django.contrib.auth.models import User
 
 class Expense(models.Model):
 
@@ -31,9 +32,9 @@ class Expense(models.Model):
     )
 
     status=models.CharField(max_length=200,choices=status_choices,)
-    updated_date=models.DateField(auto_now=True)
+   
 
-    user=models.CharField(max_length=200)
+    user=models.ForeignKey(User,on_delete=models.CASCADE)
 
     def __str__(self) -> str:
         

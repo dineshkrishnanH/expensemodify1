@@ -4,7 +4,12 @@
 
 <div class="container my-3"></div>
     <div class="w-50 mx-auto">
-      <form action="{%url 'expense-list'%}">
+
+        
+        <h1>Welcome user {{request.user}}</h1>
+        
+
+      <form action="">
         <select name="category" id="" class="from-select" onchange="this.form.submit()">
             <option value="all"{%if selected == 'all'%} selected {%endif%}>all</option>
             <option value="food"{%if selected == 'food'%} selected {%endif%}>food</option>
@@ -28,6 +33,7 @@
     <div class="row">
 
         {%for e in expense%}
+
         <div class="col-4">
             <div class="card text-bg-dark mb-3" style="max-width: 18rem;">
             <div class="card-header d-flex justify-content-between">

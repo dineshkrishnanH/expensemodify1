@@ -16,6 +16,8 @@ from django.db.models import Q
 
 from django.contrib.auth.models import User
 
+from django.contrib.auth import authenticate,login,logout
+
 
 
 class ExpenseCreateView(View):
@@ -217,6 +219,44 @@ class SignInView(View):
      form_instance=SignInForm()
 
      return render(request,self.template_name,{"form":form_instance})
+    
+    def post(self,request,*args,**kwargs):
+
+        # initialize form with request.POST
+
+        form_instance=SignInForm(request.POST)
+
+        # chk form is valid
+
+        if form_instance.is_valid():
+
+            #extract username,password
+
+            uname=form_instance.cleaned_data.get("username")
+
+            pwd=form_instance.cleaned_data.get("password")
+
+            # authenticate user 
+
+            user_object=authenticate(request,username=uname,password=pwd)
+
+        if user_object:
+
+                login(request,user_object)
+                # request.user
+
+                return redirect("task-list")
+            
+        return render(request,self.template_name,{"form":form_instance})
+
+
+class SignOutView(View):
+
+    def get(self,request,*args,**kwargs):
+
+        logout(request)
+
+        return redirect("signin")
 
 
         
